@@ -7,8 +7,8 @@ type Props = {
 
 
 const PatternRow: React.FC<Props> = (props: Props) => {
-  var blocks = props.pattern_row.map((s: number)=>{
-    return <ColorBlock s={s} />
+  var blocks = props.pattern_row.map((s: number, i)=>{
+    return <ColorBlock key={i} s={s} />
   });
 
   return(

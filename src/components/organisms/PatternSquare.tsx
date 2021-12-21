@@ -6,8 +6,8 @@ type Props = {
 }
 
 const PatternSquare: React.FC<Props> = (props) => {
-  var rows = props.s.map((row)=>{
-    return <PatternRow pattern_row={row} />
+  var rows = props.s.map((row, i)=>{
+    return <PatternRow key={i} pattern_row={row} />
   });
 
   return(
