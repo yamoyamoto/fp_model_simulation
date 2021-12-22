@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import SimpleDynamics from '../src/components/organisms/SimpleDynamics'
-import { Button } from '@material-ui/core'
 
 const SimpleDynamicsPage: NextPage = () => {
 
@@ -19,7 +18,6 @@ const SimpleDynamicsPage: NextPage = () => {
         <h1 className={styles.title}>
           FP Modelと連想記憶のシュミレーション
         </h1>
-        <Button variant="contained">Button</Button>
         <SimpleDynamics />
       </main>
 
