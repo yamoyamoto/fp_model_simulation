@@ -47,6 +47,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,1,1,1,1,1,1,1,1,],
   ];
   const [data, set_data] = React.useState(false);
+  const [clicked, set_clicked] = React.useState(false);
   const [input, update_input] = React.useState(default_input);
 
   const post: Post = {
@@ -121,6 +122,8 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   };
 
   const fetch_data = () => {
+    set_clicked(true);
+    set_data(false);
     var url: string = "/api/fp_model/simple_dynamics";
     axios.post(url, post).then(res => set_data(res.data.remembered));
   }
@@ -131,7 +134,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
       <PatternSquare s={input} update_input={(input: Array<Array<number>>) => {update_input(input)}} />
       <Button onClick={fetch_data} variant="contained">GO!!</Button>
       <div>============RESULT============</div>
-      {data ? <PatternSquare s={data} update_input={() => {}} /> : <div>now loading...</div>}
+      {clicked ? (data ? <PatternSquare s={data} update_input={() => {}} /> : <div>想起中....</div>) : null }
     </div>
   );
 }
