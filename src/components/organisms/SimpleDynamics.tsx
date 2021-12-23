@@ -132,7 +132,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     <div className='pattern_square' style={{margin: "10px"}}>
       <div>============INPUT============</div>
       <PatternSquare s={input} update_input={(input: Array<Array<number>>) => {update_input(input)}} />
-      <Button onClick={fetch_data} variant="contained">GO!!</Button>
+      <Button onClick={fetch_data} style={{marginLeft: "30%", marginTop: "30px", marginBottom: "30px"}} variant="contained">GO!!</Button>
       <div>============RESULT============</div>
       {clicked ? (data ? <PatternSquare s={data} update_input={() => {}} /> : <div>想起中....</div>) : null }
     </div>
