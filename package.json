@@ -2,15 +2,16 @@
   "name": "fp_simulation",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.24.0",
+    "express": "^4.17.2",
+    "http-proxy-middleware": "^2.0.1",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
