@@ -133,43 +133,44 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     set_data(false);
     var url: string = "/api";
     var post_data: PostData = {
-      train_data: post.train_data.map((value: Array<Array<number>>) => {return value.flat(1);}),
+      train_data: post.train_data.map((value: Array<Array<number>>) => { return value.flat(1); }),
       input_pattern: post.input.flat(1),
       dynamics_count: post.dynamics_count,
     };
     axios.post(url, post_data).then(res => {
+      console.log(res);
       var body = [];
-      for(var flat_pattern of res.data.body){
+      for (var flat_pattern of res.data.body) {
         var pattern = [];
         var row = [];
-        for(var s of flat_pattern.pattern){
+        for (var s of flat_pattern.pattern) {
           row.push(s);
-          if(row.length == row_length){
+          if (row.length == row_length) {
             pattern.push(row);
             row = [];
           }
         }
-        body.push({pattern:pattern, count: flat_pattern.count});
+        body.push({ pattern: pattern, count: flat_pattern.count });
       }
       set_data(body);
     });
   }
   // console.log(data);
 
-  return(
-    <div className='pattern_square' style={{margin: "10px"}}>
+  return (
+    <div className='pattern_square' style={{ margin: "10px" }}>
       <div>============INPUT============</div>
-      <PatternSquare s={input} update_input={(input: Array<Array<number>>) => {update_input(input)}} />
-      <Button onClick={fetch_data} style={{marginLeft: "30%", marginTop: "30px", marginBottom: "30px"}} variant="contained">GO!!</Button>
+      <PatternSquare s={input} update_input={(input: Array<Array<number>>) => { update_input(input) }} />
+      <Button onClick={fetch_data} style={{ marginLeft: "30%", marginTop: "30px", marginBottom: "30px" }} variant="contained">GO!!</Button>
       <div>============RESULT============</div>
-      {clicked ? (data ? data.map((one, i)=>{
+      {clicked ? (data ? data.map((one, i) => {
         return (
           <>
-            <p>{one.count}回</p>
-            <PatternSquare key={i} s={one.pattern} update_input={() => {}} />
+            <p>{one.count + 1}回</p>
+            <PatternSquare key={i} s={one.pattern} update_input={() => { }} />
           </>
         );
-      }) : <div>想起中....</div>) : null }
+      }) : <div>想起中....</div>) : null}
     </div>
   );
 }
