@@ -1,24 +1,29 @@
 import * as React from "react";
 import PatternSquare from "./PatternSquare";
 import axios from "../../../libs/axios";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 type Props = {};
 
+type Pattern2D = Array<Array<number>>;
+type Pattern1D = Array<number>;
+
 type Post = {
-  train_data: Array<Array<Array<number>>>;
-  input: Array<Array<number>>;
+  train_data: Pattern2D[];
+  input: Pattern2D;
   dynamics_count: number;
+  beta: number;
 };
 
 type PostData = {
-  train_data: Array<Array<number>>;
-  input_pattern: Array<number>;
+  train_data: Pattern1D[];
+  input_pattern: Pattern1D;
   dynamics_count: number;
+  beta: number;
 };
 
 type OutputPattern = {
-  pattern: Array<Array<number>>;
+  pattern: Pattern2D;
   count: number;
 };
 
@@ -35,6 +40,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   const [output_data, set_output_data] = React.useState<Array<OutputPattern>>([]);
   const [is_clicked, change_is_clicked] = React.useState(false);
   const [input, update_input] = React.useState(default_input);
+  const [beta, update_beta] = React.useState(1);
 
   const post: Post = {
     train_data: [
@@ -55,6 +61,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     ],
     input: input,
     dynamics_count: 10,
+    beta: beta,
   };
 
   const fetch_data = () => {
@@ -62,11 +69,12 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     change_show_output(false);
     var url: string = "/api";
     var post_data: PostData = {
-      train_data: post.train_data.map((value: Array<Array<number>>) => {
+      train_data: post.train_data.map((value: Pattern2D) => {
         return value.flat(1);
       }),
       input_pattern: post.input.flat(1),
       dynamics_count: post.dynamics_count,
+      beta: beta,
     };
     axios.post(url, post_data).then((res) => {
       console.log(res);
@@ -101,22 +109,43 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     return output_patterns;
   };
 
+  const calculate_inner_product = (train_data: Pattern2D[]): number => {
+    let inner_product: number = 0;
+    const flatted_train_data_1 = train_data[0].flat(1);
+    const flatted_train_data_2 = train_data[1].flat(1);
+    const N = flatted_train_data_1.length;
+    for (let i = 0; i < flatted_train_data_1.length; i++) {
+      inner_product += flatted_train_data_1[i] * flatted_train_data_2[i];
+    }
+    return inner_product / N;
+  };
+
   return (
-    <div className="pattern_square" style={{ margin: "10px" }}>
-      <div>==========TRAIN DATA=========</div>
-      {post.train_data.map((one, i) => {
-        return <PatternSquare key={i} s={one} update_input={() => {}} />;
-      })}
-      <div>============INPUT============</div>
-      <PatternSquare
-        s={input}
-        update_input={(input: Array<Array<number>>) => {
-          update_input(input);
-        }}
-      />
-      <Button onClick={fetch_data} style={{ marginLeft: "30%", marginTop: "30px", marginBottom: "30px" }} variant="contained">
-        GO!!
-      </Button>
+    <div className="simple_dynamics_app" style={{ textAlign: "center", margin: "50px 0px" }}>
+      <div className="train_data_wrap" style={{ margin: "30px 0px" }}>
+        <div>==========TRAIN DATA=========</div>
+        {post.train_data.map((one, i) => {
+          return <PatternSquare key={i} s={one} update_input={() => {}} />;
+        })}
+        <div>
+          <p>内積：{calculate_inner_product(post.train_data)}</p>
+        </div>
+      </div>
+      <div className="input_wrap" style={{ margin: "30px 0px" }}>
+        <div>============INPUT============</div>
+        <PatternSquare
+          s={input}
+          update_input={(input: Array<Array<number>>) => {
+            update_input(input);
+          }}
+        />
+        <TextField id="filled-basic" label="β" variant="filled" onChange={(event) => update_beta(Number(event.target.value))} />
+        <div className="simulation_button">
+          <Button onClick={fetch_data} style={{ marginTop: "30px" }} variant="contained">
+            GO!!
+          </Button>
+        </div>
+      </div>
       <div>============RESULT============</div>
       {is_clicked ? is_show_output ? get_output_jsx(output_data) : <div>想起中....</div> : null}
     </div>

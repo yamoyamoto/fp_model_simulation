@@ -14,7 +14,7 @@ const ColorBlock: React.FC<Props> = (props) => {
   return(
     <div 
       className='color_block'
-      style={{padding: "5px", backgroundColor: props.s == 1 ? "red" : "gray", display: "inline-block"}}
+      style={{padding: "8px", backgroundColor: props.s == 1 ? "red" : "gray", display: "inline-block"}}
       onMouseEnter={()=>{handle_click()}}
     >
     </div>

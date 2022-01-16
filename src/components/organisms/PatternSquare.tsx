@@ -18,7 +18,7 @@ const PatternSquare: React.FC<Props> = (props: Props) => {
   });
 
   return(
-    <div className='pattern_square' style={{margin: "10px"}}>
+    <div className='pattern_square' style={{margin: "10px", textAlign:"center"}}>
       {rows}
     </div>
   );
