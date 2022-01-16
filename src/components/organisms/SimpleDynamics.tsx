@@ -1,5 +1,5 @@
 import * as React from "react";
-import PatternSquare from "./PatternSquare";
+import { PatternSquare } from "../molecules/PatternSquare";
 import axios from "../../../libs/axios";
 import { Button, TextField } from "@material-ui/core";
 
