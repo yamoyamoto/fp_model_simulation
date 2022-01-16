@@ -32,8 +32,8 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   ];
   const row_length = default_input[0].length;
   const [is_show_output, change_show_output] = React.useState(false);
-  const [data, set_data] = React.useState<Array<OutputPattern>>([]);
-  const [clicked, set_clicked] = React.useState(false);
+  const [output_data, set_output_data] = React.useState<Array<OutputPattern>>([]);
+  const [is_clicked, change_is_clicked] = React.useState(false);
   const [input, update_input] = React.useState(default_input);
 
   const post: Post = {
@@ -58,7 +58,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   };
 
   const fetch_data = () => {
-    set_clicked(true);
+    change_is_clicked(true);
     change_show_output(false);
     var url: string = "/api";
     var post_data: PostData = {
@@ -83,7 +83,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
         }
         body.push({ pattern: pattern, count: flat_pattern.count });
       }
-      set_data(body);
+      set_output_data(body);
       change_show_output(true);
     });
   };
@@ -114,21 +114,11 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
           update_input(input);
         }}
       />
-      <Button
-        onClick={fetch_data}
-        style={{ marginLeft: "30%", marginTop: "30px", marginBottom: "30px" }}
-        variant="contained"
-      >
+      <Button onClick={fetch_data} style={{ marginLeft: "30%", marginTop: "30px", marginBottom: "30px" }} variant="contained">
         GO!!
       </Button>
       <div>============RESULT============</div>
-      {clicked ? (
-        is_show_output ? (
-          get_output_jsx(data)
-        ) : (
-          <div>想起中....</div>
-        )
-      ) : null}
+      {is_clicked ? is_show_output ? get_output_jsx(output_data) : <div>想起中....</div> : null}
     </div>
   );
 };
