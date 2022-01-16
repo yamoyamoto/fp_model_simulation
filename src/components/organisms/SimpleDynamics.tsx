@@ -139,7 +139,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             update_input(input);
           }}
         />
-        <TextField id="filled-basic" label="β" variant="filled" onChange={(event) => update_beta(Number(event.target.value))} />
+        <TextField id="filled-basic" label="βを入力" variant="filled" onChange={(event) => update_beta(Number(event.target.value))} />
         <div className="simulation_button">
           <Button onClick={fetch_data} style={{ marginTop: "30px" }} variant="contained">
             GO!!
