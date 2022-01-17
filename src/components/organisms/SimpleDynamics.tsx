@@ -120,6 +120,13 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     return inner_product / N;
   };
 
+  const change_T = (T: number) => {
+    if (T == 0) {
+      return;
+    }
+    update_beta(1 / T);
+  };
+
   return (
     <div className="simple_dynamics_app" style={{ textAlign: "center", margin: "50px 0px" }}>
       <div className="train_data_wrap" style={{ margin: "30px 0px" }}>
@@ -139,7 +146,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             update_input(input);
           }}
         />
-        <TextField id="filled-basic" label="βを入力" variant="filled" onChange={(event) => update_beta(Number(event.target.value))} />
+        <TextField id="filled-basic" label="Tを入力" variant="filled" onChange={(event) => change_T(Number(event.target.value))} />
         <div className="simulation_button">
           <Button onClick={fetch_data} style={{ marginTop: "30px" }} variant="contained">
             GO!!
