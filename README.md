@@ -5,9 +5,11 @@
 物理学科の卒業研究テーマ「_ホップフィールド模型と連想記憶の関係_」で使用する、簡単な連想記憶のシュミレーションアプリ。(兼 Next.js の練習)
 
 アプリケーションのリンクは以下。(vercel にホストしている)
+
 <https://fp-model-simulation-7u5m06eis-yamoyamoto.vercel.app/>
 
 API サーバーのコードは以下で管理している。
+
 <https://github.com/yamoyamoto/fp_model_sumilation_api>
 
 ## 使い方
