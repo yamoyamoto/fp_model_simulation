@@ -13,8 +13,7 @@ app.prepare().then(() => {
   server.use(
     "/api",
     createProxyMiddleware({
-      // target: "https://fp-sumilation.herokuapp.com/",
-      target: "http://localhost:8000/",
+      target: dev ? "http://localhost:8000/" : "https://fp-sumilation.herokuapp.com/",
       changeOrigin: true,
     })
   );
