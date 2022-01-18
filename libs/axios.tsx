@@ -1,10 +1,10 @@
-import Axios from 'axios'
+import Axios from "axios";
 
-Axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
- 
+Axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+const production = process.env.NODE_ENV === "production";
 
 const axios = Axios.create({
-    baseURL: 'http://localhost:3000',
-})
- 
-export default axios
+  baseURL: production ? "http://localhost:8000" : "https://fp-sumilation.herokuapp.com/",
+});
+
+export default axios;
