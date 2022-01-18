@@ -6,7 +6,7 @@
 
 アプリケーションのリンクは以下。(vercel にホストしている)
 
-<https://fp-model-simulation-7u5m06eis-yamoyamoto.vercel.app/>
+<https://fp-model-simulation.vercel.app>
 
 API サーバーのコードは以下で管理している。
 
