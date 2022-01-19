@@ -130,7 +130,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   return (
     <div className="simple_dynamics_app" style={{ textAlign: "center", margin: "50px 0px" }}>
       <div className="train_data_wrap" style={{ margin: "30px 0px" }}>
-        <div>==========TRAIN DATA=========</div>
+        <div>==========記銘パターン=========</div>
         {post.train_data.map((one, i) => {
           return <PatternSquare key={i} s={one} update_input={() => {}} />;
         })}
@@ -139,7 +139,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
         </div>
       </div>
       <div className="input_wrap" style={{ margin: "30px 0px" }}>
-        <div>============INPUT============</div>
+        <div>========INPUT(クリックで色を変えられます!)=======</div>
         <PatternSquare
           s={input}
           update_input={(input: Array<Array<number>>) => {
