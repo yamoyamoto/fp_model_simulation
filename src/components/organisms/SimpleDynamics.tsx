@@ -10,9 +10,6 @@ type Pattern1D = Array<number>;
 
 type Post = {
   train_data: Pattern2D[];
-  input: Pattern2D;
-  dynamics_count: number;
-  T: number;
 };
 
 type PostData = {
@@ -66,6 +63,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   const [is_clicked, change_is_clicked] = React.useState(false);
   const [input, update_input] = React.useState(default_input);
   const [T, update_T] = React.useState(1);
+  const [dynamics_count, update_dynamics_count] = React.useState(10);
 
   const post: Post = {
     train_data: [
@@ -134,9 +132,6 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       ],
     ],
-    input: input,
-    dynamics_count: 10,
-    T: T,
   };
 
   const fetch_data = () => {
@@ -147,8 +142,8 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
       train_data: post.train_data.map((value: Pattern2D) => {
         return value.flat(1);
       }),
-      input_pattern: post.input.flat(1),
-      dynamics_count: post.dynamics_count,
+      input_pattern: input.flat(1),
+      dynamics_count: dynamics_count,
       beta: 1 / T,
     };
     axios.post(url, post_data).then((res) => {
@@ -233,6 +228,19 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             <MenuItem value={1}>1</MenuItem>
             <MenuItem value={10}>10</MenuItem>
             <MenuItem value={100}>100</MenuItem>
+          </Select>
+        </div>
+        <div className="choose_dynamics_count_wrap" style={{ margin: "30px 0" }}>
+          <InputLabel id="select-dynamics-count-label">ダイナミクスの実行回数を選択</InputLabel>
+          <Select
+            labelId="select-dynamics-count-label"
+            value={dynamics_count}
+            style={{ fontSize: "20px", margin: "10px 0" }}
+            onChange={(event) => update_dynamics_count(Number(event.target.value))}
+          >
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+            <MenuItem value={1000}>1000</MenuItem>
           </Select>
         </div>
         <div className="simulation_button">
