@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PatternSquare } from "../molecules/PatternSquare";
 import axios from "../../../libs/axios";
-import { Button, TextField } from "@material-ui/core";
+import { Button, Select, MenuItem, InputLabel } from "@material-ui/core";
 
 type Props = {};
 
@@ -12,7 +12,7 @@ type Post = {
   train_data: Pattern2D[];
   input: Pattern2D;
   dynamics_count: number;
-  beta: number;
+  T: number;
 };
 
 type PostData = {
@@ -40,7 +40,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   const [output_data, set_output_data] = React.useState<Array<OutputPattern>>([]);
   const [is_clicked, change_is_clicked] = React.useState(false);
   const [input, update_input] = React.useState(default_input);
-  const [beta, update_beta] = React.useState(1);
+  const [T, update_T] = React.useState(1);
 
   const post: Post = {
     train_data: [
@@ -61,7 +61,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     ],
     input: input,
     dynamics_count: 10,
-    beta: beta,
+    T: T,
   };
 
   const fetch_data = () => {
@@ -74,7 +74,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
       }),
       input_pattern: post.input.flat(1),
       dynamics_count: post.dynamics_count,
-      beta: beta,
+      beta: 1 / T,
     };
     axios.post(url, post_data).then((res) => {
       console.log(res);
@@ -124,7 +124,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     if (T == 0) {
       return;
     }
-    update_beta(1 / T);
+    update_T(T);
   };
 
   return (
@@ -146,7 +146,20 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             update_input(input);
           }}
         />
-        <TextField id="filled-basic" label="Tを入力" variant="filled" onChange={(event) => change_T(Number(event.target.value))} />
+        <div className="choose_T_wrap" style={{ margin: "30px 0" }}>
+          <InputLabel id="select-T-label">T(ノイズの大きさ)を選択</InputLabel>
+          <Select
+            labelId="select-T-label"
+            value={T}
+            style={{ fontSize: "20px", margin: "10px 0" }}
+            onChange={(event) => change_T(Number(event.target.value))}
+          >
+            <MenuItem value={0.1}>0.1</MenuItem>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+          </Select>
+        </div>
         <div className="simulation_button">
           <Button onClick={fetch_data} style={{ marginTop: "30px" }} variant="contained">
             GO!!
