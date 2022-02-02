@@ -30,7 +30,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
   const [output_data, set_output_data] = React.useState<Array<OutputPattern>>([]);
   const [is_clicked, change_is_clicked] = React.useState(false);
   const [input, update_input] = React.useState(template_inputs[0]);
-  const [T, update_T] = React.useState(1);
+  const [T, update_T] = React.useState(10);
   const [dynamics_count, update_dynamics_count] = React.useState(10);
 
   const post: Post = {
