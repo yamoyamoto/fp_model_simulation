@@ -119,7 +119,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
         <div>========INPUT(クリックで色を変えられます!)=======</div>
         <ButtonGroup  variant="outlined" aria-label="outlined button group">
           {template_inputs.map((input, i) =>{
-            return <Button onClick={()=>{change_default_input(i)}}>{i}</Button>
+            return <Button key={i} onClick={()=>{change_default_input(i)}}>{i}</Button>
           }
           )}
         </ButtonGroup>
