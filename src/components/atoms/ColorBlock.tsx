@@ -14,7 +14,11 @@ const ColorBlock: React.FC<Props> = (props) => {
   return (
     <div
       className="color_block"
-      style={{ padding: "3px", backgroundColor: props.s == 1 ? "red" : "gray", display: "inline-block" }}
+      style={{
+        padding: "3px",
+        backgroundColor: props.s == 1 ? "red" : "gray",
+        display: "inline-block",
+      }}
       onMouseOver={() => {
         handle_change();
       }}
