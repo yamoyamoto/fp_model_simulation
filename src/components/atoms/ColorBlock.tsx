@@ -19,7 +19,7 @@ const ColorBlock: React.FC<Props> = (props) => {
         backgroundColor: props.s == 1 ? "red" : "gray",
         display: "inline-block",
       }}
-      onMouseOver={() => {
+      onClick={() => {
         handle_change();
       }}
     ></div>
