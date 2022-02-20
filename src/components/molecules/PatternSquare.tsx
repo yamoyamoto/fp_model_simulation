@@ -49,7 +49,7 @@ export const PatternSquare: React.FC<PatternSquareProps> = (props) => {
   });
 
   return (
-    <div className="pattern_square" style={{ margin: "10px", textAlign: "center" }}>
+    <div className="pattern_square" style={{ margin: "10px", textAlign: "center", display:"inline-block" }}>
       {rows}
     </div>
   );

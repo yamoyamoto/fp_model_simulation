@@ -15,7 +15,7 @@ const ColorBlock: React.FC<Props> = (props) => {
     <div
       className="color_block"
       style={{
-        padding: "3px",
+        padding: "10px",
         backgroundColor: props.s == 1 ? "red" : "gray",
         display: "inline-block",
       }}
