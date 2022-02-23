@@ -143,7 +143,7 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             <MenuItem value={100}>100</MenuItem>
           </Select>
         </div>
-        <div className="choose_dynamics_count_wrap" style={{ margin: "30px 0" }}>
+        {/* <div className="choose_dynamics_count_wrap" style={{ margin: "30px 0" }}>
           <InputLabel id="select-dynamics-count-label">ダイナミクスの実行回数を選択</InputLabel>
           <Select
             labelId="select-dynamics-count-label"
@@ -155,9 +155,9 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
             <MenuItem value={100}>100</MenuItem>
             <MenuItem value={1000}>1000</MenuItem>
           </Select>
-        </div>
+        </div> */}
         <div className="simulation_button">
-          <Button onClick={fetch_data} style={{ marginTop: "30px" }} variant="contained">
+          <Button onClick={fetch_data} style={{ marginTop: "10px" }} variant="contained">
             GO!!
           </Button>
         </div>
