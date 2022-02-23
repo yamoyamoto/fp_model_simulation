@@ -111,9 +111,9 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
         {post.train_data.map((one, i) => {
           return <PatternSquare key={i} s={one} update_input={() => {}} />;
         })}
-        <div>
+        {/* <div>
           <p>内積：{calculate_inner_product(post.train_data)}</p>
-        </div>
+        </div> */}
       </div>
       <div className="input_wrap" style={{ margin: "30px 0px" }}>
         <div>========INPUT(クリックで色を変えられます!)=======</div>
