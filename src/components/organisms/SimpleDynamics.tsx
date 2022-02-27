@@ -74,13 +74,22 @@ const SimpleDynamics: React.FC<Props> = (props: Props) => {
     data.slice(0, 4).map((one, i) => {
       output_patterns.push(
         <div style={{display:"inline-block"}}>
-          <p>{one.count + 1}回</p>
+          <p style={{fontSize:"30px"}}>{one.count + 1}回</p>
           <PatternSquare key={i} s={one.pattern} update_input={() => {}} />
+          <p style={{fontSize:"30px"}}>重なり: {calculate_hamming_distance(train_data[0].flat(), one.pattern.flat())}</p>
         </div>
       );
     });
     return output_patterns;
   };
+
+  const calculate_hamming_distance = (train_data: Pattern1D, output_pattern: Pattern1D): number => {
+    let hamming_distance = 0;
+    for(let i=0; i<train_data.length; i++){
+      hamming_distance += train_data[i] === output_pattern[i] ? 1 : 0;
+    }
+    return hamming_distance / train_data.length;
+  }
 
   const calculate_inner_product = (train_data: Pattern2D[]): number => {
     let inner_product: number = 0;

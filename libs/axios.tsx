@@ -7,6 +7,7 @@ const axios = Axios.create({
   baseURL: production
     ? "https://fp-sumilation.herokuapp.com/"
     : "https://fp-sumilation.herokuapp.com/",
+    // : "http://172.18.187.246:8000/",
 });
 
 export default axios;
